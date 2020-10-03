@@ -1,0 +1,13 @@
+1. 分治法就是将一个大的问题分解为多个小的问题，最后再将小的问题的结果给合并起来，得出大问题的结果。
+dev divide_conquer(problem,param1,param2)
+    # 如果问题已经处理完成，则结束递归
+    if problem is None
+        print_result
+        return
+    # 处理当前逻辑
+    data = prepare_data(problem)
+    subProblems = split_problem(problem, data)
+    # 调用下一结构的子问题
+    subResult = divide_conquer(subProblems, p1, p2);
+    # 合并结果
+    result = process_result(subResult)

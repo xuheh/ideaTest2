@@ -11,38 +11,43 @@ import java.util.List;
  */
 public class Solution {
 
-    List<List<Integer>> res = new ArrayList<>();
 
-    public List<List<Integer>> combinationSum(int[] candidates, int target) {
-
+    public static List<List<Integer>> combinationSum(int[] candidates, int target) {
+        List<List<Integer>> res = new ArrayList<>();
         if (candidates.length <= 0) {
             return res;
         }
         Arrays.sort(candidates);
-        dfs(candidates, target, 0, new ArrayList<Integer>());
+        backtrack(candidates, target, 0, new ArrayList<Integer>(), res);
         return res;
     }
 
-    private void dfs(int[] candidates, int target, int begin, ArrayList<Integer> integers) {
+    private static void backtrack(int[] candidates, int target, int index, ArrayList<Integer> integers, List<List<Integer>> res) {
 
         if (target == 0) {
             res.add(new ArrayList<>(integers));
             return;
         }
 
-        for (int i = begin; i < candidates.length; i++) {
+        for (int i = index; i < candidates.length; i++) {
 
             // 剪枝
             if (target < candidates[i]) {
                 break;
             }
+            target -= candidates[i];
             integers.add(candidates[i]);
-            dfs(candidates, target - candidates[i] , i, integers);
+            backtrack(candidates, target, i , integers, res);
             integers.remove(integers.size() - 1);
-
-
         }
 
+
     }
+
+    public static void main(String[] args) {
+        int[] nums = {2, 3, 6, 7};
+        System.out.println(combinationSum(nums, 7));
+    }
+
 
 }
